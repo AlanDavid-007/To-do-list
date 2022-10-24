@@ -23,6 +23,7 @@ const InputModal = ({
     todoToBeEdited,
     setTodoToBeEdited,
     handleEditTodo,
+    handleSubmit,
     todos
     }) => {
     
@@ -31,7 +32,7 @@ const InputModal = ({
         setTodoInputValue("");
         setTodoToBeEdited(null);
     }
-    constHandleSubmit = () => {
+    const handleSubmit = () => {
         if (!todoToBeEdited) {
             handleAddTodo({
                 title: todoInputValue,
@@ -43,7 +44,7 @@ const InputModal = ({
                 title: todoInputValue,
                 date: todoToBeEdited.date,
                 key: todoToBeEdited.key
-            })
+            });
         }
         setTodoInputValue("");
     }

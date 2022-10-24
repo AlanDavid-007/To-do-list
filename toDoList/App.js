@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-
+import {Text} from 'react-native';
 //Components
 import Home from "./components/Home.js";
 

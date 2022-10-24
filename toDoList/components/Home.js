@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {useState} from 'react';
 
 //Components
 import Header from "./Header.js";
@@ -46,7 +46,7 @@ const Home = () => {
     const handleEditTodo = (editTodo) => {
         const newTodos = [...todos];
         const TodoIndex = todos.findIndex((todo) => todo.key === editedTodo.key);
-        newTodos.splice(todoIndex, 1, editedTodo);
+        newTodos.splice(TodoIndex, 1, editTodo);
         setTodos(newTodos);
         setTodoToBeEdited(null);
         setModalVisible(false);
