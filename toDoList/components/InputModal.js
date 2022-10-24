@@ -14,13 +14,38 @@ import {
 } from "./../styles/appStyles.js";
 import {AntDesign} from "@expo/vector-icons";
 
-const InputModal = ({modalVisible, setModalVisible, todoInputValue, setTodoInputValue}) => {
+const InputModal = ({
+    modalVisible,
+    setModalVisible,
+    todoInputValue,
+    setTodoInputValue,
+    handleAddTodo,
+    todoToBeEdited,
+    setTodoToBeEdited,
+    handleEditTodo,
+    todos
+    }) => {
     
     const handleCloseModal = () => {
         setModalVisible(false);
+        setTodoInputValue("");
+        setTodoToBeEdited(null);
     }
     constHandleSubmit = () => {
-
+        if (!todoToBeEdited) {
+            handleAddTodo({
+                title: todoInputValue,
+                date: new Date().toUTCString(),
+                key: '${(todos[todos.lenght-1] && parseInt(todos[todos.lenght -1].key) + 1) || 1 }'
+            });
+        } else {
+            handleEditTodo({
+                title: todoInputValue,
+                date: todoToBeEdited.date,
+                key: todoToBeEdited.key
+            })
+        }
+        setTodoInputValue("");
     }
     return (
         <>
@@ -35,7 +60,9 @@ const InputModal = ({modalVisible, setModalVisible, todoInputValue, setTodoInput
                 onRequestClose={handleCloseModal}
             >
                 <ModalContainer>
+                    <ModalView>
                     <ModalIcon>
+                        <HeaderTitle>Tarefas</HeaderTitle>
                         <AntDesign name="edit" size={30} color={colors.tertiary}/>
                     </ModalIcon>
                     
@@ -59,6 +86,7 @@ const InputModal = ({modalVisible, setModalVisible, todoInputValue, setTodoInput
                         </ModalAction>
                     
                     </ModalActionGroup>
+                    </ModalView>
                 </ModalContainer>
             </Modal>
         </>
