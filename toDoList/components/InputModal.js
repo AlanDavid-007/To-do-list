@@ -23,7 +23,6 @@ const InputModal = ({
     todoToBeEdited,
     setTodoToBeEdited,
     handleEditTodo,
-    handleSubmit,
     todos
     }) => {
     
@@ -37,7 +36,7 @@ const InputModal = ({
             handleAddTodo({
                 title: todoInputValue,
                 date: new Date().toUTCString(),
-                key: '${(todos[todos.lenght-1] && parseInt(todos[todos.lenght -1].key) + 1) || 1 }'
+                key: `${(todos[todos.lenght-1] && parseInt(todos[todos.length-1].key) + 1) || 1 }`
             });
         } else {
             handleEditTodo({

@@ -11,7 +11,7 @@ export default function App() {
   return (
     <Container>
       <Home />
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text></Text>
       <StatusBar style="light" />
     </Container>
   );

@@ -8,7 +8,7 @@ import InputModal from './InputModal.js';
 
 const Home = () => {
 
-    //Initial To-dos
+    //Initial Todos
     const initialTodos = [ {
         title: "Escreva sua primeira tarefa!",
         date: "15 de Outubro de 2022",
@@ -45,7 +45,7 @@ const Home = () => {
 
     const handleEditTodo = (editTodo) => {
         const newTodos = [...todos];
-        const TodoIndex = todos.findIndex((todo) => todo.key === editedTodo.key);
+        const TodoIndex = todos.findIndex((todo) => todo.key === editTodo.key);
         newTodos.splice(TodoIndex, 1, editTodo);
         setTodos(newTodos);
         setTodoToBeEdited(null);
@@ -55,8 +55,8 @@ const Home = () => {
         <>
             <Header handleClearTodos={handleClearTodos} />
             <ListItems 
-                todos = {todos}
-                setTodos = {setTodos}
+                todos={todos}
+                setTodos={setTodos}
                 handleTriggerEdit={handleTriggerEdit}
             />
             <InputModal 
