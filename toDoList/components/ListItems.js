@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Text} from 'react-native';
 
 //Styled Components
 import {
@@ -8,7 +9,7 @@ import {
     TodoDate,
     HiddenButton,
     SwipedTodoText,
-    colors
+    colors, 
 } from "../styles/appStyles.js";
 
 import { SwipeListView } from 'react-native-swipe-list-view';
@@ -27,7 +28,7 @@ const ListItems = ({todos, setTodos, handleTriggerEdit}) => {
     }
     return (
         <>
-        {todos.lenght == 0 && <TodoText> Você não tem tarefas para hoje</TodoText>}
+        {todos.lenght == 0 && <TodoText>Você não tem tarefas hoje</TodoText>}
         {todos.lenght != 0 && <SwipeListView
             data={todos}
             renderItem={(data) => {
@@ -72,7 +73,8 @@ const ListItems = ({todos, setTodos, handleTriggerEdit}) => {
             onRowClose={() => {
                 setSwipedRow(null);
             }}
-        />}</>
+        />}
+        </>
     );
 }
 

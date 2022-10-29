@@ -1,6 +1,6 @@
 import React from 'react';
 import {useState} from 'react';
-
+import { Text } from 'react-native';
 //Components
 import Header from "./Header.js";
 import ListItems from './ListItems.js';
@@ -9,17 +9,26 @@ import InputModal from './InputModal.js';
 const Home = () => {
 
     //Initial Todos
-    const initialTodos = [ {
+    const initialTodos = [{
         title: "Escreva sua primeira tarefa!",
         date: "15 de Outubro de 2022",
         key: "1"
+    }, {
+        title: "Compre Pão",
+        date: "18 de Outubro de 2022",
+        key: "2"
+    },
+    {
+        title: "Aprenda React Native",
+        date: "17 de Outubro de 2022",
+        key: "3"
     }]
 
     const [todos, setTodos] = useState(initialTodos);
 
     //Clear all todos
     const handleClearTodos = () => {
-        setTodos = ([]);
+        setTodos([]);
     }
 
     //Modal Visibility
