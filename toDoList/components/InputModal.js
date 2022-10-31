@@ -1,6 +1,12 @@
 import React from "react";
 import {Modal} from 'react-native';
 
+
+// Arrumar edit input
+// Criar input de descrição, data e prioridade com cor
+// Criar banco de dados async offline
+// Fazer func para trocar cor para vermelho quando a data da task exceder
+// Arrumar texto de todos == 0
 import {
     ModalButton,
     ModalContainer,
@@ -25,7 +31,6 @@ const InputModal = ({
     handleEditTodo,
     todos
     }) => {
-    
     const handleCloseModal = () => {
         setModalVisible(false);
         setTodoInputValue("");
@@ -34,7 +39,7 @@ const InputModal = ({
     const handleSubmit = () => {
         if (!todoToBeEdited) {
             handleAddTodo({
-                //Arrumar erro de inputvalue e key repetida
+                
                 title: todoInputValue,
                 date: new Date().toUTCString(),
                 key: `${(todos[todos.lenght-1] && parseInt(todos[todos.length -1].key) + 1) || 1 }`
@@ -48,6 +53,7 @@ const InputModal = ({
         }
         setTodoInputValue("");
     }
+
     return (
         <>
             <ModalButton onPress={() => {setModalVisible(true)}}>
@@ -72,7 +78,7 @@ const InputModal = ({
                         placeholderTextColor={colors.alternative}
                         selectionColor={colors.secondary}
                         autoFocus={true}
-                        onChangeText={(text) => setTodoInputValue(text)}
+                        onChangeText={(text) => setTodoInputValue({title: text})}
                         value={todoInputValue}
                         onSubmitEditing={handleSubmit}
                         />

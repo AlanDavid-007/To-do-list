@@ -1,6 +1,6 @@
 import React from 'react';
-import {useState} from 'react';
-import { Text } from 'react-native';
+import {useState, useEffect} from 'react';
+import { Keyboard, Text} from 'react-native';
 //Components
 import Header from "./Header.js";
 import ListItems from './ListItems.js';
@@ -36,9 +36,10 @@ const Home = () => {
     const [todoInputvalue, setTodoInputValue] = useState();
     
     //Function to add a new todo
-    const handleAddTodo = (todo) => {
-        const newTodos = [...todos, todo];
-        setTodos(newTodos);
+    const handleAddTodo = () => {
+        Keyboard.dismiss();
+        setTodos([...todos, todoInputvalue]);
+        setTodoInputValue(null);
         setModalVisible(false);
     }
     
@@ -56,7 +57,7 @@ const Home = () => {
         const newTodos = [...todos];
         const TodoIndex = todos.findIndex((todo) => todo.key === editTodo.key);
         newTodos.splice(TodoIndex, 1, editTodo);
-        setTodos(newTodos);
+        setTodos([...todos]);
         setTodoToBeEdited(null);
         setModalVisible(false);
     }
