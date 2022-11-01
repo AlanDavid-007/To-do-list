@@ -32,7 +32,8 @@ const ListItems = ({todos, setTodos, handleTriggerEdit}) => {
         {todos.lenght != 0 && <SwipeListView
             data={todos}
             renderItem={(data) => {
-                const RowText = data.item.key == swipedRow ? SwipedTodoText : TodoText;
+                 const RowText = data.item.key == swipedRow ? SwipedTodoText : TodoText;
+                 console.log(data.item.title);
                 return(
                     <ListView
                             underlayColor={colors.primary}

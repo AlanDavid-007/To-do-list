@@ -44,7 +44,7 @@ const Home = () => {
     }
     
     //Editing a todo
-
+    const [toggleSubmit, setToggleSubmit] = useState(true);
     const [todoToBeEdited, setTodoToBeEdited] = useState(null);
 
     const handleTriggerEdit = (item) => {
@@ -53,11 +53,12 @@ const Home = () => {
         setTodoInputValue(item.title);
     }
 
-    const handleEditTodo = (editTodo) => {
+    const handleEditTodo = (editMap, editTodo) => {
         const newTodos = [...todos];
-        const TodoIndex = todos.findIndex((todo) => todo.key === editTodo.key);
-        newTodos.splice(TodoIndex, 1, editTodo);
-        setTodos([...todos]);
+        const todoIndex = todos.findIndex((todo) => todo.key === editTodo);
+        newTodos.splice(todoIndex, 1, editTodo);
+        console.log(todoIndex);
+        setTodos(newTodos);
         setTodoToBeEdited(null);
         setModalVisible(false);
     }
