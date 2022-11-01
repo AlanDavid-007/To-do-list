@@ -6,22 +6,28 @@ import Header from "./Header.js";
 import ListItems from './ListItems.js';
 import InputModal from './InputModal.js';
 
-const Home = () => {
+const Home = (todoInputValue, setTodoInputValue) => {
 
     //Initial Todos
     const initialTodos = [{
         title: "Escreva sua primeira tarefa!",
+        description: "escreva aqui",
         date: "15 de Outubro de 2022",
-        key: "1"
+        priority: "1",
+        key: '1'
     }, {
         title: "Compre Pão",
-        date: "18 de Outubro de 2022",
-        key: "2"
+        description: "desenvolva aqui",
+        date: "14 de Outubro de 2022",
+        priority: "2",
+        key: '2'
     },
     {
         title: "Aprenda React Native",
-        date: "17 de Outubro de 2022",
-        key: "3"
+        description: "Aceite aqui",
+        date: "12 de Outubro de 2022",
+        priority: "3",
+        key: '3'
     }]
 
     const [todos, setTodos] = useState(initialTodos);
@@ -33,34 +39,34 @@ const Home = () => {
 
     //Modal Visibility
     const [modalVisible, setModalVisible] = useState(false);
-    const [todoInputvalue, setTodoInputValue] = useState();
     
     //Function to add a new todo
-    const handleAddTodo = () => {
-        Keyboard.dismiss();
-        setTodos([...todos, todoInputvalue]);
-        setTodoInputValue(null);
+    const handleAddTodo = (todo) => {
+        const newTodos = [...todos, todo];
+        setTodos(newTodos);
         setModalVisible(false);
+
+        // const myNewTodo = todos.push();
     }
-    
     //Editing a todo
-    const [toggleSubmit, setToggleSubmit] = useState(true);
     const [todoToBeEdited, setTodoToBeEdited] = useState(null);
 
     const handleTriggerEdit = (item) => {
         setTodoToBeEdited(item);
         setModalVisible(true);
-        setTodoInputValue(item.title);
+        // setTodoInputValue(item.title);
     }
-
-    const handleEditTodo = (editMap, editTodo) => {
+    const handleEditTodo = (editedTodo) => {
         const newTodos = [...todos];
-        const todoIndex = todos.findIndex((todo) => todo.key === editTodo);
-        newTodos.splice(todoIndex, 1, editTodo);
-        console.log(todoIndex);
+        const todoIndex = todos.findIndex((todo) => todo.key === editedTodo.key);
+        // if (todoIndex !== -1) {
+        //     newTodos[todoIndex].title = 'Compre leite';
+        // };
+        newTodos.splice(todoIndex, 1, editedTodo);
         setTodos(newTodos);
         setTodoToBeEdited(null);
         setModalVisible(false);
+        console.log(todoIndex);
     }
     return (
         <>
@@ -73,13 +79,12 @@ const Home = () => {
             <InputModal 
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}
-                todoInputvalue={todoInputvalue}
-                setTodoInputValue={setTodoInputValue}
                 handleAddTodo={handleAddTodo}
                 todoToBeEdited={todoToBeEdited}
                 setTodoToBeEdited={setTodoToBeEdited}
                 handleEditTodo={handleEditTodo}
                 todos={todos}
+                setTodos={setTodos}
             />
         </>
     );
