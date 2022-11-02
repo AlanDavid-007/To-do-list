@@ -6,7 +6,7 @@ import {Modal, TextInput, Text} from 'react-native';
 // Criar banco de dados async offline
 // Fazer func para trocar cor para vermelho quando a data da task exceder
 //// Arrumar texto de todos == 0
-import DatePicker from 'react-native-datepicker';
+import DatePicker from 'react-native-date-picker'
 
 import {
     ModalButton,
