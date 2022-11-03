@@ -46,6 +46,7 @@ const ListItems = ({todos, setTodos, handleTriggerEdit, handleEditTodo, prioriCo
                             <>
                                 <RowText>{data.item.title}</RowText>
                                 <RowText style={styles.rowText}>{data.item.description}</RowText>
+                                <TodoDate>Prioridade:{data.item.priority}</TodoDate>
                                 <TodoDate>{data.item.date}</TodoDate>
                             </>
                         </ListView>
