@@ -80,7 +80,7 @@ const InputModal = ({
     const handleSubmit = () => {
         if (!todoToBeEdited) {
             if ( priori == "1") {
-                prioriColor === "green" // green
+                setPrioriColor = "green" // green
                 handleAddTodo({
                     title: todoInputValue,
                     date: result, //date
@@ -91,7 +91,7 @@ const InputModal = ({
                 });
             } else {
                 if (priori == "2") {
-                    prioriColor === "blue" // blue;
+                    setPrioriColor = "blue" // blue;
                     handleAddTodo({
                         title: todoInputValue,
                         date: result, //date
@@ -102,7 +102,7 @@ const InputModal = ({
                     });
                 } else {
                     if (priori == "3") {
-                        prioriColor === "yellow" // yellow;
+                        setPrioriColor = "yellow" // yellow;
                         handleAddTodo({
                             title: todoInputValue,
                             date: result, //date
@@ -113,7 +113,7 @@ const InputModal = ({
                         });
                     } else {
                         if (priori == "4") {
-                            prioriColor === "orange" // orange;
+                            setPrioriColor = "orange" // orange;
                             handleAddTodo({
                                 title: todoInputValue,
                                 date: result, //date
@@ -128,7 +128,7 @@ const InputModal = ({
             };
         } else {
             if ( priori == "1") {
-                prioriColor === "green" // green
+                setPrioriColor = "green" // green
                 handleEditTodo({
                     title: todoInputValue,
                     date: todoToBeEdited.date, //date
@@ -139,7 +139,7 @@ const InputModal = ({
                 });
             } else {
                 if (priori == "2") {
-                    prioriColor === "blue" // blue;
+                    setPrioriColor = "blue" // blue;
                     handleEditTodo({
                         title: todoInputValue,
                         date: todoToBeEdited.date, //date
@@ -150,7 +150,7 @@ const InputModal = ({
                     });
                 } else {
                     if (priori == "3") {
-                        prioriColor === "yellow" // yellow;
+                        setPrioriColor = "yellow" // yellow;
                         handleEditTodo({
                             title: todoInputValue,
                             date: todoToBeEdited.date, //date
@@ -161,7 +161,7 @@ const InputModal = ({
                         });
                     } else {
                         if (priori == "4") {
-                            prioriColor === "orange" // orange;
+                            setPrioriColor = "orange" // orange;
                             handleEditTodo({
                                 title: todoInputValue,
                                 date: todoToBeEdited.date, //date
@@ -229,6 +229,7 @@ const InputModal = ({
                          autoFocus={true}
                          onChangeText={(text) => setPriori(text)}
                          value={priori}
+                         onSubmitEditing={handleSubmit}
                          />
                         <SafeAreaView style={{ flex: 1 }}>
       <View >
