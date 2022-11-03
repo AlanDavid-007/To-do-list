@@ -15,6 +15,10 @@ export const colors = {
   secondary: "#4D3636",
   tertiary: "#E6E6E6",
   alternative: "#999999",
+  green: "rgb(0,255,0)",
+  blue: "rgb(0,0,255)",
+  yellow: "rgb(255,255,0)",
+  orange: "rgb(255,127,80)"
 };
 
 const statusBarHeight = Constants.statusBarHeight;

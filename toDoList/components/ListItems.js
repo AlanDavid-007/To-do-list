@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text} from 'react-native';
+import {Text, StyleSheet} from 'react-native';
 
 //Styled Components
 import {
@@ -15,7 +15,7 @@ import {
 import { SwipeListView } from 'react-native-swipe-list-view';
 import {Entypo} from "@expo/vector-icons";
 
-const ListItems = ({todos, setTodos, handleTriggerEdit, handleEditTodo}) => {
+const ListItems = ({todos, setTodos, handleTriggerEdit, handleEditTodo, prioriColor, setPrioriColor}) => {
 
     //For styling currently swiped todo row
     const [swipedRow, setSwipedRow] = useState(null);
@@ -37,13 +37,15 @@ const ListItems = ({todos, setTodos, handleTriggerEdit, handleEditTodo}) => {
                 //  console.log(data.item.title);
                 return(
                     <ListView
-                            underlayColor={colors.primary}
+                            // underlayColor = {colors{prioriColor}}
+                            style={{backgroundColor: data.item.color}}
                             onPress={() => {
                                 handleTriggerEdit(data.item)
                             }}
                         >
                             <>
                                 <RowText>{data.item.title}</RowText>
+                                <RowText style={styles.rowText}>{data.item.description}</RowText>
                                 <TodoDate>{data.item.date}</TodoDate>
                             </>
                         </ListView>
@@ -79,5 +81,9 @@ const ListItems = ({todos, setTodos, handleTriggerEdit, handleEditTodo}) => {
         </>
     );
 }
-
+const styles = StyleSheet.create({
+    rowText: {
+        color: "gray"
+    }
+    })
 export default ListItems;

@@ -14,12 +14,14 @@ const Home = (todoInputValue, setTodoInputValue) => {
         description: "escreva aqui",
         date: "15 de Outubro de 2022",
         priority: "1",
+        color: "blue",
         key: '1'
     }, {
         title: "Compre Pão",
         description: "desenvolva aqui",
         date: "14 de Outubro de 2022",
         priority: "2",
+        color: "orange",
         key: '2'
     },
     {
@@ -27,6 +29,7 @@ const Home = (todoInputValue, setTodoInputValue) => {
         description: "Aceite aqui",
         date: "12 de Outubro de 2022",
         priority: "3",
+        color: "black",
         key: '3'
     }]
 
