@@ -15,6 +15,9 @@ import {
 import { SwipeListView } from 'react-native-swipe-list-view';
 import {Entypo} from "@expo/vector-icons";
 
+//Async storage
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const ListItems = ({todos, setTodos, handleTriggerEdit, handleEditTodo, prioriColor, setPrioriColor}) => {
 
     //For styling currently swiped todo row
@@ -24,17 +27,44 @@ const ListItems = ({todos, setTodos, handleTriggerEdit, handleEditTodo, prioriCo
         const newTodos = [...todos];
         const todoIndex = todos.findIndex((todo) => todo.key === rowKey);
         newTodos.splice(todoIndex, 1);
-        setTodos(newTodos);
-        console.log(todoIndex);
+        
+        AsyncStorage.setItem("storedTodos", JSON.stringify([newTodos])).then(() => {
+            setTodos(newTodos);
+            // console.log(todoIndex);
+        }).catch((error) => console.log(error));
     }
+    const [dates, setDates] = useState(new Date());
+    function pad(n) {return n < 10 ? "0"+n : n;}
+    var Exced = pad(dates.getDate())+"/"+pad(dates.getMonth()+1)+"/"+dates.getFullYear();
+    console.log(Exced);
     return (
         <>
-        {todos.lenght == 0 && <TodoText>Você não tem tarefas hoje</TodoText>}
-        {todos.lenght != 0 && <SwipeListView
+         <SwipeListView
+        
             data={todos}
             renderItem={(data) => {
+                {if (data.item.date < Exced) {
                  const RowText = data.item.key == swipedRow ? SwipedTodoText : TodoText;
-                //  console.log(data.item.title);
+                  console.log(data.item);
+                return(
+                    <ListView
+                            // underlayColor = {colors{prioriColor}}
+                            style={{backgroundColor: "#D91616"}}
+                            onPress={() => {
+                                handleTriggerEdit(data.item)
+                            }}
+                        >
+                            <>
+                                <RowText>{data.item.title}</RowText>
+                                {/* <RowText style={styles.rowText}>{data.item.description}</RowText> */}
+                                {/* <TodoDate style={{color: "white"}}>Prioridade:{data.item.priority}</TodoDate> */}
+                                <TodoDate style={{color: "white"}}>Prioridade:{data.item.priority}, {data.item.date}</TodoDate>
+                            </>
+                        </ListView>
+                )
+            } else {
+                const RowText = data.item.key == swipedRow ? SwipedTodoText : TodoText;
+                  console.log(data.item.key);
                 return(
                     <ListView
                             // underlayColor = {colors{prioriColor}}
@@ -45,12 +75,13 @@ const ListItems = ({todos, setTodos, handleTriggerEdit, handleEditTodo, prioriCo
                         >
                             <>
                                 <RowText>{data.item.title}</RowText>
-                                <RowText style={styles.rowText}>{data.item.description}</RowText>
-                                <TodoDate>Prioridade:{data.item.priority}</TodoDate>
-                                <TodoDate>{data.item.date}</TodoDate>
+                                {/* <RowText style={styles.rowText}>{data.item.description}</RowText> */}
+                                {/* <TodoDate style={{color: "white"}}>Prioridade:{data.item.priority}</TodoDate> */}
+                                <TodoDate style={{color: "white"}}>Prioridade:{data.item.priority}, {data.item.date}</TodoDate>
                             </>
                         </ListView>
                 )
+            }};
             }}
             renderHiddenItem = {(data, rowMap) => {
                 return (
@@ -78,7 +109,7 @@ const ListItems = ({todos, setTodos, handleTriggerEdit, handleEditTodo, prioriCo
             onRowClose={() => {
                 setSwipedRow(null);
             }}
-        />}
+        />
         </>
     );
 }

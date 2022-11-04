@@ -1,11 +1,7 @@
 import React, {useState} from "react";
 import {Modal, TextInput, Text, Button, SafeAreaView, StyleSheet, View} from 'react-native';
-//// Arrumar edit input
-// Criar input de descrição, data e prioridade com cor
-    //Configurar date picker e inputs de descrição e cor
-// Criar banco de dados async offline
-// Fazer func para trocar cor para vermelho quando a data da task exceder
-//// Arrumar texto de todos == 0
+import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 import {
@@ -34,15 +30,15 @@ const InputModal = ({
 
         
     const [todoInputValue, setTodoInputValue] = useState("");
-    const [descriptionInputValue, setDescriptionInputValue] = useState("");
+    // const [descriptionInputValue, setDescriptionInputValue] = useState("");
 
     const local = 'pt-br';
     const [datePicker, setDatePicker] = useState(false);
     const [date, setDate] = useState(new Date());
     const [timePicker, setTimePicker] = useState(false);
     const [time, setTime] = useState(new Date(Date.now()));
-    const [priori, setPriori] = useState("");
-    const [prioriColor, setPrioriColor] = useState("");
+    const [priori, setPriori] = useState();
+    // const [prioriColor, setPrioriColor] = useState("");
     function showDatePicker() {
         setDatePicker(true);
       };
@@ -64,7 +60,6 @@ const InputModal = ({
       function pad(n) {return n < 10 ? "0"+n : n;}
       var result = pad(date.getDate())+"/"+pad(date.getMonth()+1)+"/"+date.getFullYear();
     //   console.log(result)
-
         //Date late func
 // colocar func para trocar cor para vermelho do card
 
@@ -80,47 +75,43 @@ const InputModal = ({
     const handleSubmit = () => {
         if (!todoToBeEdited) {
             if ( priori == "1") {
-                setPrioriColor = "green" // green
                 handleAddTodo({
                     title: todoInputValue,
                     date: result, //date
-                    description: descriptionInputValue,
+                    // description: descriptionInputValue,
                     priority: parseInt(priori),
-                    color: prioriColor,
-                    key: `${(todos[todos.lenght-1] && parseInt(todos[todos.length -1].key) + 1 || 1)}`
+                    color: "#2BE29C",
+                    key: uuidv4()
                 });
             } else {
                 if (priori == "2") {
-                    setPrioriColor = "blue" // blue;
                     handleAddTodo({
                         title: todoInputValue,
                         date: result, //date
-                        description: descriptionInputValue,
+                        // description: descriptionInputValue,
                         priority: parseInt(priori),
-                        color: prioriColor,
-                        key: `${(todos[todos.lenght-1] && parseInt(todos[todos.length -1].key) + 1 || 1)}`
+                        color: "#87CEEB",
+                        key: uuidv4()
                     });
                 } else {
                     if (priori == "3") {
-                        setPrioriColor = "yellow" // yellow;
                         handleAddTodo({
                             title: todoInputValue,
                             date: result, //date
-                            description: descriptionInputValue,
+                            // description: descriptionInputValue,
                             priority: parseInt(priori),
-                            color: prioriColor,
-                            key: `${(todos[todos.lenght-1] && parseInt(todos[todos.length -1].key) + 1 || 1)}`
+                            color: "#BDBF20",
+                            key: uuidv4()
                         });
                     } else {
                         if (priori == "4") {
-                            setPrioriColor = "orange" // orange;
                             handleAddTodo({
                                 title: todoInputValue,
                                 date: result, //date
-                                description: descriptionInputValue,
+                                // description: descriptionInputValue,
                                 priority: parseInt(priori),
-                                color: prioriColor,
-                                key: `${(todos[todos.lenght-1] && parseInt(todos[todos.length -1].key) + 1 || 1)}`
+                                color: "#FFA07A",
+                                key: uuidv4()
                             });
                         }
                     }
@@ -128,46 +119,42 @@ const InputModal = ({
             };
         } else {
             if ( priori == "1") {
-                setPrioriColor = "green" // green
                 handleEditTodo({
                     title: todoInputValue,
                     date: todoToBeEdited.date, //date
-                    description: descriptionInputValue,
+                    // description: descriptionInputValue,
                     priority: parseInt(todoToBeEdited.priority),
-                    color: prioriColor,
+                    color: "#2BE29C",
                     key: todoToBeEdited.key
                 });
             } else {
                 if (priori == "2") {
-                    setPrioriColor = "blue" // blue;
                     handleEditTodo({
                         title: todoInputValue,
                         date: todoToBeEdited.date, //date
-                        description: descriptionInputValue,
+                        // description: descriptionInputValue,
                         priority: parseInt(todoToBeEdited.priority),
-                        color: prioriColor,
+                        color: "#87CEEB",
                         key: todoToBeEdited.key
                     });
                 } else {
                     if (priori == "3") {
-                        setPrioriColor = "yellow" // yellow;
                         handleEditTodo({
                             title: todoInputValue,
                             date: todoToBeEdited.date, //date
-                            description: descriptionInputValue,
+                            // description: descriptionInputValue,
                             priority: parseInt(todoToBeEdited.priority),
-                            color: prioriColor,
+                            color: "#BDBF20",
                             key: todoToBeEdited.key
                         });
                     } else {
                         if (priori == "4") {
-                            setPrioriColor = "orange" // orange;
                             handleEditTodo({
                                 title: todoInputValue,
                                 date: todoToBeEdited.date, //date
-                                description: descriptionInputValue,
+                                // description: descriptionInputValue,
                                 priority: parseInt(todoToBeEdited.priority),
-                                color: prioriColor,
+                                color: "#FFA07A",
                                 key: todoToBeEdited.key
                             });
                         }
@@ -176,7 +163,7 @@ const InputModal = ({
             };
             // console.log(todoInputValue);
         }
-        console.log(prioriColor);
+        console.log(priori);
         setTodoInputValue("");
     }
     
@@ -210,7 +197,7 @@ const InputModal = ({
                         onSubmitEditing={handleSubmit}
                         />
                         <Text></Text>
-                        <StyledInput 
+                        {/* <StyledInput 
                          placeholder="Adicione uma descrição"
                          style={{height: 40}}
                          placeholderTextColor={colors.alternative}
@@ -219,7 +206,7 @@ const InputModal = ({
                          onChangeText={(text) => setDescriptionInputValue(text)}
                          value={descriptionInputValue}
                          onSubmitEditing={handleSubmit}
-                         />
+                         /> */}
                          <Text></Text>
                          <StyledInput 
                          placeholder="Escolha uma prioridade"
@@ -230,6 +217,8 @@ const InputModal = ({
                          onChangeText={(text) => setPriori(text)}
                          value={priori}
                          onSubmitEditing={handleSubmit}
+                         keyboardType='numeric'
+                         maxLength={4}  //setting limit of input
                          />
                         <SafeAreaView style={{ flex: 1 }}>
       <View >
@@ -266,7 +255,7 @@ const InputModal = ({
  
         {/* {!timePicker && (
           <View style={{ margin: 10 }}>
-            <Button title="Show Time Picker" color="green" onPress={showTimePicker} />
+            <Button title="Show Time Picker" color="#2BE29C" onPress={showTimePicker} />
           </View>
         )} */}
  

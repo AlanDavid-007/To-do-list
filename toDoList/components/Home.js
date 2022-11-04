@@ -6,48 +6,44 @@ import Header from "./Header.js";
 import ListItems from './ListItems.js';
 import InputModal from './InputModal.js';
 
-const Home = (todoInputValue, setTodoInputValue) => {
+//Async storage
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-    //Initial Todos
-    const initialTodos = [{
-        title: "Escreva sua primeira tarefa!",
-        description: "escreva aqui",
-        date: "15 de Outubro de 2022",
-        priority: "1",
-        color: "blue",
-        key: '1'
-    }, {
-        title: "Compre Pão",
-        description: "desenvolva aqui",
-        date: "14 de Outubro de 2022",
-        priority: "2",
-        color: "orange",
-        key: '2'
-    },
-    {
-        title: "Aprenda React Native",
-        description: "Aceite aqui",
-        date: "12 de Outubro de 2022",
-        priority: "3",
-        color: "black",
-        key: '3'
-    }]
+
+const Home = ( {todoInputValue, setTodoInputValue}) => {
+
+
+     //Initial Todos
+     const initialTodos = [
+        {
+          title: "Escreva sua primeira tarefa!",
+          description: "escreva aqui",
+          date: "15 de Outubro de 2022",
+          priority: "1",
+          color: "blue",
+          key: '1'
+      }
+      ];
 
     const [todos, setTodos] = useState(initialTodos);
 
     //Clear all todos
     const handleClearTodos = () => {
-        setTodos([]);
+        AsyncStorage.setItem("storedTodos", JSON.stringify([])).then(() => {
+            setTodos([]);
+        }).catch((error) => console.log(error));
     }
 
     //Modal Visibility
     const [modalVisible, setModalVisible] = useState(false);
-    
     //Function to add a new todo
     const handleAddTodo = (todo) => {
         const newTodos = [...todos, todo];
-        setTodos(newTodos);
-        setModalVisible(false);
+
+        AsyncStorage.setItem("storedTodos", JSON.stringify([newTodos])).then(() => {
+            setTodos(newTodos);
+            setModalVisible(false);
+        }).catch((error) => console.log(error));
 
         // const myNewTodo = todos.push();
     }
@@ -66,10 +62,12 @@ const Home = (todoInputValue, setTodoInputValue) => {
         //     newTodos[todoIndex].title = 'Compre leite';
         // };
         newTodos.splice(todoIndex, 1, editedTodo);
-        setTodos(newTodos);
-        setTodoToBeEdited(null);
-        setModalVisible(false);
-        console.log(todoIndex);
+        AsyncStorage.setItem("storedTodos", JSON.stringify([newTodos])).then(() => {
+            setTodos(newTodos);
+            setTodoToBeEdited(null);
+            setModalVisible(false);
+            // console.log(todoIndex);
+        }).catch((error) => console.log(error));
     }
     return (
         <>
