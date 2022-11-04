@@ -38,7 +38,8 @@ const ListItems = ({todos, setTodos, handleTriggerEdit, handleEditTodo, prioriCo
     var Exced = pad(dates.getDate())+"/"+pad(dates.getMonth()+1)+"/"+dates.getFullYear();
     console.log(Exced);
     return (
-        <> { if (todos.lenght == 0){<TodoText>Você não possui tarefas pata hoje</TodoText>}
+        //Verificar operador de condição para que não haja erro no AppLoading
+        <> { if (todos.lenght == 0){<TodoText>Você não possui tarefas para hoje</TodoText>}
               else { if (todos.lenght !== 0) {
          <SwipeListView
         
