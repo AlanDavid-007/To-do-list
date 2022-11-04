@@ -38,7 +38,8 @@ const ListItems = ({todos, setTodos, handleTriggerEdit, handleEditTodo, prioriCo
     var Exced = pad(dates.getDate())+"/"+pad(dates.getMonth()+1)+"/"+dates.getFullYear();
     console.log(Exced);
     return (
-        <>
+        <> { if (todos.lenght == 0){<TodoText>Você não possui tarefas pata hoje</TodoText>}
+              else { if (todos.lenght !== 0) {
          <SwipeListView
         
             data={todos}
@@ -110,7 +111,7 @@ const ListItems = ({todos, setTodos, handleTriggerEdit, handleEditTodo, prioriCo
                 setSwipedRow(null);
             }}
         />
-        </>
+        </>}}}
     );
 }
 const styles = StyleSheet.create({
