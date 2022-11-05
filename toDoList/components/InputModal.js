@@ -13,7 +13,8 @@ import {
     ModalActionGroup,
     ModalIcon,
     HeaderTitle,
-    colors
+    colors,
+    TodoText
 } from "./../styles/appStyles.js";
 import {AntDesign} from "@expo/vector-icons";
 
@@ -37,7 +38,7 @@ const InputModal = ({
     const [date, setDate] = useState(new Date());
     const [timePicker, setTimePicker] = useState(false);
     const [time, setTime] = useState(new Date(Date.now()));
-    const [priori, setPriori] = useState();
+    const [priori, setPriori] = useState(1);
     // const [prioriColor, setPrioriColor] = useState("");
     function showDatePicker() {
         setDatePicker(true);
@@ -73,89 +74,89 @@ const InputModal = ({
 // Continuar func de prioridade para trocar de cor - levar texto para listItems
 
     const handleSubmit = () => {
-        if (!todoToBeEdited) {
-            if ( priori == "1") {
+        if (!todoToBeEdited && todoInputValue !== '') {
+            if ( priori == 1) {
                 handleAddTodo({
-                    title: todoInputValue,
-                    date: result, //date
+                    "title": todoInputValue,
+                    "date": result, //date
                     // description: descriptionInputValue,
-                    priority: parseInt(priori),
-                    color: "#2BE29C",
-                    key: uuidv4()
+                    "priority": priori,
+                    "color": "#2BE29C",
+                    "key": uuidv4()
                 });
             } else {
-                if (priori == "2") {
+                if (priori == 2) {
                     handleAddTodo({
-                        title: todoInputValue,
-                        date: result, //date
+                        "title": todoInputValue,
+                        "date": result, //date
                         // description: descriptionInputValue,
-                        priority: parseInt(priori),
-                        color: "#87CEEB",
-                        key: uuidv4()
+                        "priority": priori,
+                        "color": "#87CEEB",
+                        "key": uuidv4()
                     });
                 } else {
-                    if (priori == "3") {
+                    if (priori == 3) {
                         handleAddTodo({
-                            title: todoInputValue,
-                            date: result, //date
+                            "title": todoInputValue,
+                            "date": result, //date
                             // description: descriptionInputValue,
-                            priority: parseInt(priori),
-                            color: "#BDBF20",
-                            key: uuidv4()
+                            "priority": priori,
+                            "color": "#BDBF20",
+                            "key": uuidv4()
                         });
                     } else {
-                        if (priori == "4") {
+                        if (priori == 4) {
                             handleAddTodo({
-                                title: todoInputValue,
-                                date: result, //date
+                                "title": todoInputValue,
+                                "date": result, //date
                                 // description: descriptionInputValue,
-                                priority: parseInt(priori),
-                                color: "#FFA07A",
-                                key: uuidv4()
+                                "priority": priori,
+                                "color": "#FFA07A",
+                                "key": uuidv4()
                             });
                         }
                     }
                 }
             };
         } else {
-            if ( priori == "1") {
+            if ( priori == 1) {
                 handleEditTodo({
-                    title: todoInputValue,
-                    date: todoToBeEdited.date, //date
+                    "title": todoInputValue,
+                    "date": todoToBeEdited.date, //date
                     // description: descriptionInputValue,
-                    priority: parseInt(todoToBeEdited.priority),
-                    color: "#2BE29C",
-                    key: todoToBeEdited.key
+                    "priority": todoToBeEdited.priority,
+                    "color": "#2BE29C",
+                    "key": todoToBeEdited.key
                 });
             } else {
-                if (priori == "2") {
+                if (priori == 2) {
                     handleEditTodo({
-                        title: todoInputValue,
-                        date: todoToBeEdited.date, //date
+                        "title": todoInputValue,
+                        "date": todoToBeEdited.date, //date
                         // description: descriptionInputValue,
-                        priority: parseInt(todoToBeEdited.priority),
-                        color: "#87CEEB",
-                        key: todoToBeEdited.key
+                        "priority": todoToBeEdited.priority,
+                        "color": "#87CEEB",
+                        "key": todoToBeEdited.key
                     });
                 } else {
-                    if (priori == "3") {
+                    if (priori == 3) {
                         handleEditTodo({
-                            title: todoInputValue,
-                            date: todoToBeEdited.date, //date
+                            "title": todoInputValue,
+                            "date": todoToBeEdited.date, //date
                             // description: descriptionInputValue,
-                            priority: parseInt(todoToBeEdited.priority),
-                            color: "#BDBF20",
-                            key: todoToBeEdited.key
+                            "priority": todoToBeEdited.priority,
+                            "color": "#BDBF20",
+                            "key": todoToBeEdited.key
                         });
                     } else {
-                        if (priori == "4") {
+                        if (priori == 4) {
                             handleEditTodo({
-                                title: todoInputValue,
-                                date: todoToBeEdited.date, //date
+                                "title": todoInputValue,
+                                "date": todoToBeEdited.date, //date
                                 // description: descriptionInputValue,
-                                priority: parseInt(todoToBeEdited.priority),
-                                color: "#FFA07A",
-                                key: todoToBeEdited.key
+                                "priority": todoToBeEdited.priority,
+                                "color": "#FFA07A",
+                                "key": todoToBeEdited.key
                             });
                         }
                     }
@@ -163,12 +164,13 @@ const InputModal = ({
             };
             // console.log(todoInputValue);
         }
-        console.log(priori);
+        // console.log(priori);
         setTodoInputValue("");
     }
     
     return (
         <>
+
             <ModalButton onPress={() => {setModalVisible(true)}}>
                 <AntDesign name="plus" size={30} color={colors.secondary}/>
             </ModalButton>

@@ -27,8 +27,7 @@ const ListItems = ({todos, setTodos, handleTriggerEdit, handleEditTodo, prioriCo
         const newTodos = [...todos];
         const todoIndex = todos.findIndex((todo) => todo.key === rowKey);
         newTodos.splice(todoIndex, 1);
-        
-        AsyncStorage.setItem("storedTodos", JSON.stringify([newTodos])).then(() => {
+        AsyncStorage.setItem("storedTodos", JSON.stringify(newTodos)).then(() => {
             setTodos(newTodos);
             // console.log(todoIndex);
         }).catch((error) => console.log(error));
@@ -36,18 +35,20 @@ const ListItems = ({todos, setTodos, handleTriggerEdit, handleEditTodo, prioriCo
     const [dates, setDates] = useState(new Date());
     function pad(n) {return n < 10 ? "0"+n : n;}
     var Exced = pad(dates.getDate())+"/"+pad(dates.getMonth()+1)+"/"+dates.getFullYear();
-    console.log(Exced);
+    // console.log(Exced);
     return (
         //Verificar operador de condição para que não haja erro no AppLoading
-        <> { if (todos.lenght == 0){<TodoText>Você não possui tarefas para hoje</TodoText>}
-              else { if (todos.lenght !== 0) {
+        <>
+         {/* { if (todos.lenght == 0){
+            <TodoText>Você não possui tarefas para hoje</TodoText>}; */}
+              {/* else { if (todos.lenght !== 0) { */}
          <SwipeListView
         
             data={todos}
             renderItem={(data) => {
                 {if (data.item.date < Exced) {
                  const RowText = data.item.key == swipedRow ? SwipedTodoText : TodoText;
-                  console.log(data.item);
+                //   console.log(data.item);
                 return(
                     <ListView
                             // underlayColor = {colors{prioriColor}}
@@ -66,7 +67,7 @@ const ListItems = ({todos, setTodos, handleTriggerEdit, handleEditTodo, prioriCo
                 )
             } else {
                 const RowText = data.item.key == swipedRow ? SwipedTodoText : TodoText;
-                  console.log(data.item.key);
+                //   console.log(data.item.key);
                 return(
                     <ListView
                             // underlayColor = {colors{prioriColor}}
@@ -112,7 +113,7 @@ const ListItems = ({todos, setTodos, handleTriggerEdit, handleEditTodo, prioriCo
                 setSwipedRow(null);
             }}
         />
-        </>}}}
+        </>
     );
 }
 const styles = StyleSheet.create({
