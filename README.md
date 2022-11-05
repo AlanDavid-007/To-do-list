@@ -30,7 +30,7 @@ Todo list with Add task, Edit task, Delete one and all tasks, colors by priority
 
 ### Screenshot
 
-![First Slide](./To-do-list/toDoList/assets/home.jpg)
-![Second Slide](./To-do-list/toDoList/assets/task.jpg)
-![Third Slide](./To-do-list/toDoList/assets/toggle.jpg)
-![Fourth Slide](./To-do-list/toDoList/assets/tasks.jpg)
+![First Slide](./To-do-list/blob/main/toDoList/assets/home.jpg)
+![Second Slide](./To-do-list/blob/main/toDoList/assets/task.jpg)
+![Third Slide](./To-do-list/blob/main/toDoList/assets/toggle.jpg)
+![Fourth Slide](./To-do-list/blob/main/toDoList/assets/tasks.jpg)
